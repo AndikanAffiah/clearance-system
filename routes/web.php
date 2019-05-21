@@ -25,6 +25,7 @@ Route::get('clearance', function () {
     return view('clearance');
 });
 Route::post('studentprofile', 'StudentProfileController@show')->name('studentprofile.show');
+Route::post('update', 'updateController@update')->name('studentprofile.update');
 
 Route::post('clearance', 'ClearanceController@store')->name('clearance.add');
 

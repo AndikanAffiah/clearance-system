@@ -3,7 +3,6 @@
 <style>
     *{
         overflow-x: hidden;
-        overflow-y: hidden;
     }
     .img{
         height: 150px;
@@ -30,7 +29,7 @@
 
         <section>
             <div class="d-flex justify-content-center">
-                <h3>Clearance for {{ $users[0]['name'] }}</h3>
+                <h3>Clearance Board for {{ $users[0]['name'] }}</h3>
             </div>
             <div class="row">
                 <div class="col-2 f-col  bg-primary text-align-center">
@@ -44,7 +43,7 @@
                         <span><i class="fas fa-user ml-2"></i></span> <span><a href=""><div class="text-dark text ml-5">Profile</div></a></span>
                     </div>
                 </div>
-                <form method="POST" action="{{ route('check') }}" class="col-9">
+                <form method="POST" action="{{ route('studentprofile.update') }}" class="col-9">
                     @csrf
                     <table class="table table-striped">
                         <thead>
@@ -57,14 +56,15 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <input name="user_id" value="{{ $id }}" class="form-control" type="text" hidden>
                             @forelse ($checked as $clearance)
                                 <tr>
                                     <th scope="row">{{ $loop->iteration }}</th>
                                     <td>{{ $clearance->name }}</td>
                                     <td>
-                                        <input type="checkbox" name="{{ $clearance->name }}" {{ $clearance->is_submitted ? 'checked' : '' }} class="ml-3">
+                                        <input type="checkbox" name="{{ $clearance->name }}" {{ $clearance->is_submitted ? 'checked' : '' }} class="ml-3" disabled>
                                     </td>
-                                    <td><input type="checkbox" name="" class="ml-3" {{ $clearance->is_cleared ? 'checked' : '' }} ></td>
+                                    <td><input type="checkbox" name="{{ $clearance->id }}" class="ml-3" {{ $clearance->is_cleared ? 'checked' : '' }} ></td>
                                     <td><input type="checkbox" name="" class="ml-3" {{ !$clearance->is_cleared ? 'checked' : '' }} ></td>
                                 </tr>
                             @empty
